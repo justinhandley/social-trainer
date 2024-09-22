@@ -1,7 +1,8 @@
 # Social Media Post Generator Using OpenAI
 
-This project allows you to generate and fine-tune a model to create engaging social media posts using OpenAI's API. The script converts a dataset into the correct format, generates prompts and completions, and even fine-tunes a model based on your needs.
+This project allows you to generate and fine-tune a model to create engaging social media posts using OpenAI's API. The script converts a dataset from a facebook export into the correct format, generates prompts and completions, and even fine-tunes a model based on your needs.
 
+This lets you take your last few years of social posts and convert them to a fine-tuning file you can upload to OpenAI to create a powerful social media assistant.
 ## Prerequisites
 
 Before getting started, ensure you have the following:
