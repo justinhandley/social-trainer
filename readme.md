@@ -122,6 +122,18 @@ Once your model is fine-tuned, you can load it by referencing its model ID. To g
     max_tokens=1024
     )
 ```
+Alternatively, there is a chat-interface.py script.  You'll need to install gradio
+
+```bash
+pip install gradio
+```
+
+Then, update the ```.env``` file with the fine tuned model ID you get after fine tune runs.  Once you've done that, you can run
+
+```bash
+python chat-interface.py
+```
+It will give you a link you can open in a browser to chat with your new interface.
 ### Debugging (Optional)
 
 If you want to enable logging for debugging purposes, you can modify the `.env` file by setting the `DEBUG` variable to `true`:
