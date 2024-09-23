@@ -25,10 +25,10 @@ def clean_text(text):
     text = text.encode('latin1').decode('utf-8')
 
     # Remove problematic encoding artifacts (like \u00c2)
-    text = re.sub(r'\\u00[89A-Za-z][0-9A-Fa-f]', '', text)
+#     text = re.sub(r'\\u00[89A-Za-z][0-9A-Fa-f]', '', text)
 
     # Remove any remaining escaped sequences like \" or excess spaces
-    text = text.replace('\\"', '"')
+#     text = text.replace('\\"', '"')
 
     return text
 
@@ -71,7 +71,7 @@ def clean_input_with_openai(post_body):
             model="gpt-4",  # Or gpt-3.5-turbo depending on your access
             messages=[
                 {"role": "system", "content": os.getenv('CLEANUP_INSTRUCTIONS')},
-                {"role": "user", "content": f"Clean up this post and return it as plain text with no double quotes: '{post_body}' "}
+                {"role": "user", "content": f"Clean up this post and return it properly formatted text for use in the content field of a jsonl file for training openai: '{post_body}' "}
             ]
         )
 
@@ -121,7 +121,7 @@ def process_json(input_file, output_file):
 
                 # Generate the prompt using OpenAI API
                 prompt = generate_prompt_with_openai(post_body)
-                completion = clean_input_with_openai(post_body)
+                completion = post_body
 
                 if prompt and completion:
                     # Construct the chat-based format with system, user, and assistant roles
