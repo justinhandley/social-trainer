@@ -1,13 +1,14 @@
 import gradio as gr
-import openai
+from openai import OpenAI
 import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env
 load_dotenv()
 
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 # Load your OpenAI API key and fine-tuned model ID from environment variables
-openai.api_key = os.getenv("OPENAI_API_KEY")
 model_id = os.getenv("FINETUNED_MODEL")
 
 # Check if the model ID is loaded correctly
@@ -16,14 +17,12 @@ if not model_id:
 
 def chat_with_ai(message):
     try:
-        response = openai.ChatCompletion.create(
-            model=model_id,  # Use the model ID loaded from environment variable
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant for Silvermouse."},
-                {"role": "user", "content": message}
-            ]
-        )
-        return response.choices[0].message['content']
+        response = client.chat.completions.create(model=model_id,  # Use the model ID loaded from environment variable
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant for Silvermouse."},
+            {"role": "user", "content": message}
+        ])
+        return response.choices[0].message.content
 
     # Catch all exceptions and display a friendly error message
     except Exception as e:
